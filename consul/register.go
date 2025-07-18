@@ -3,13 +3,21 @@ package consul
 import (
 	"fmt"
 
-	"github.com/PrayagaSahu/go-service-utils/model"
 	"github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
 )
 
+// ServiceConfig is the input for registering a service in Consul
+type ServiceConfig struct {
+	ID      string
+	Name    string
+	Address string
+	Port    int
+	Tags    []string
+}
+
 // RegisterService registers a service with Consul
-func RegisterService(cfg model.ServiceConfig) {
+func RegisterService(cfg ServiceConfig) {
 	consulCfg := api.DefaultConfig()
 	consulCfg.Address = "127.0.0.1:8500"
 
